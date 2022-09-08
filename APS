@@ -1,0 +1,141 @@
+// DISCIPLINA: PROGRAMAÇÃO ESTRUTURADA - CÓDIGO: 931 (TERÇA-FEIRA 18:40-19:40)
+// PROFESSOR: SÉRGIO A. MONTEIRO
+// ALUNO: DIEGO VALENTIM SILVA - MATRICULA: 2021100240 
+// Questão 01 (4,0 pontos)
+// Desenvolver um programa em C que faça:
+// 1. Criar 5 vetores contendo 10 valores reais gerados aleatoriamente;
+// 2. Utilizar uma função recursiva para somar apenas os elementos pares de cada vetor;
+// 3. Retornar maior elemento do item 2; [FUNÇÃO maior_soma]
+// 4. Colocar a solução no GITHUB (coloque o endereço aqui).
+// LINK GITHUB: 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <locale.h>
+#define N 10
+
+void processamento(int v[]);
+void saida_dados(int v[]);
+int somar_pares(int v[]);
+int somar_pares_recursivos(int q, int v[]);
+int eh_par(int n);
+int maior_soma (int v1, int v2, int v3, int v4, int v5);
+
+int main (){
+	
+	  int somapar_v1, vetor1[N];
+	  int somapar_v2, vetor2[N];
+	  int somapar_v3, vetor3[N];
+	  int somapar_v4, vetor4[N];
+	  int somapar_v5, vetor5[N];
+	  int maior;
+
+ 	setlocale (LC_ALL, "Portuguese");
+  
+  	printf ("*****************VETOR 1**********************");
+	processamento (vetor1);
+	saida_dados(vetor1);
+	somapar_v1= somar_pares_recursivos(N-1, vetor1);
+	printf("\n -- A SOMA DOS PARES ACIMA É = %i\n",somapar_v1);
+	printf ("\n");
+	  
+	printf ("*****************VETOR 2**********************");
+	processamento(vetor2);
+	saida_dados(vetor2);
+	somapar_v2= somar_pares_recursivos(N-1, vetor2);
+	printf("\n -- A SOMA DOS PARES ACIMA É = %i\n",somapar_v2);
+	printf ("\n");
+	   
+	printf ("*****************VETOR 3**********************");
+	processamento(vetor3);
+	saida_dados(vetor3);
+	somapar_v3= somar_pares_recursivos(N-1, vetor3);
+	printf("\n -- A SOMA DOS PARES ACIMA É = %i\n",somapar_v3);
+	printf ("\n");
+	
+	printf ("*****************VETOR 4**********************");
+	processamento(vetor4);
+	saida_dados(vetor4);
+	somapar_v4= somar_pares_recursivos(N-1, vetor4);
+	printf("\n -- A SOMA DOS PARES ACIMA É = %i\n",somapar_v4);
+	printf ("\n");
+	
+	printf ("*****************VETOR 5**********************");
+	processamento(vetor5);
+	saida_dados(vetor5);
+	somapar_v5= somar_pares_recursivos(N-1, vetor5);
+	printf("\n -- A SOMA DOS PARES ACIMA É = %i\n",somapar_v5);
+	printf ("\n");
+	 
+	printf ("-- SOMAS TOTAIS = [%i] - [%i] - [%i] - [%i] - [%i]\n", somapar_v1, somapar_v2, somapar_v3, somapar_v4, somapar_v5);
+
+	maior=maior_soma(somapar_v1,somapar_v2,somapar_v3, somapar_v4, somapar_v5);
+	
+	printf ("-- MAIOR NUMERO ENCONTRADO = [%i]", maior);
+	
+	return(0);
+}
+
+int maior_soma (int v1, int v2, int v3, int v4, int v5){
+		int maior=0, i=1;
+		while (i=1){
+			if (v1> maior){
+			maior= v1;	}
+				
+			if (v2> maior){
+			maior= v2;	}
+			
+			if (v3> maior){
+			maior= v3;    }
+		      
+		       if (v4> maior){
+		       maior= v4;    }
+		      
+		       if (v5> maior){
+		       maior= v5;}
+		      
+			return maior;}
+		}
+
+void saida_dados(int v[]){
+	int i;
+	for(i=0;i<N;i++){
+		printf("\n VETOR NA POSIÇÃO [%i] = %i", i+1, v[i]);
+	}}
+
+void processamento(int v[]){
+	int i, n;
+  	time_t t;
+      	n = 5;
+      	
+      	srand((unsigned) time(&t));
+      	
+   	for(i=0 ; i<N ; i++) {
+      		v[i]= (int)rand() %10;
+   	}}
+
+int somar_pares(int v[]){
+	int i, soma=0;
+	for(i=0;i<N;i++){
+    		if(v[i]%2==0){
+     			soma=soma+v[i]; 
+    	}}
+		return soma;
+	}
+
+int eh_par(int n){
+  	if(n%2==0){
+    		return 1;
+  	}
+  		return 0;
+	}
+
+int somar_pares_recursivos(int n, int v[]){
+  int resultado;
+	if(n==0){
+		return eh_par(v[0])?v[0]:0;
+	}
+  	resultado = eh_par(v[n])?v[n]:0;
+		return resultado + somar_pares_recursivos(n-1, v);
+}
